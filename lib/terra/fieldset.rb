@@ -8,7 +8,8 @@ module Terra
     end
 
     # Add (or get?) a field
-    def field(type, id, title, options={})
+    def field(type, id=nil, title=nil, options={})
+      return @fields.detect { |f| f.name == type }  if id.nil?
       @fields << Field.create(type, id, title, options)
     end
 
@@ -31,7 +32,7 @@ module Terra
     end
 
     def fields_html(item=nil)
-      fields.map { |f| f.to_html(item.try(f.name.to_sym)) }
+      fields.map { |f| f.to_html(item.try(f.name.to_sym)) }.join("\n")
     end
 
     def legend_html
@@ -42,8 +43,9 @@ module Terra
     attr_reader :id
 
     # Shortcuts for text, textarea, password..
-    Fields.all.each do |type|
-      define_method(type) { |*a| field type, *a }
+    def method_missing(meth, *args, &blk)
+      super  unless Fields.all.include?(meth)
+      field meth, *args
     end
   end
 end

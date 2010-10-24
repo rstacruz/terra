@@ -8,7 +8,7 @@ Terra is an HTML form generator.
 Configure your form with a Ruby DSL like so.
 
     form = Terra::Form.new
-    form.configure {
+    form.configure do
       text :name, "Name"
       text :email, "Email address"
 
@@ -20,7 +20,7 @@ Configure your form with a Ruby DSL like so.
             :blue => "Blue"
           }
       }
-    }
+    end
 
 ## Info
 
