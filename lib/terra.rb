@@ -4,5 +4,6 @@ module Terra
   autoload :Fields,   "#{PREFIX}/terra/fields"
   autoload :Fieldset, "#{PREFIX}/terra/fieldset"
   autoload :Form,     "#{PREFIX}/terra/form"
-end
 
+  require "#{PREFIX}/terra/version"
+end
